@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 27% 11%;
+    --foreground: 0 0% 100%;
+    --card: 240 25% 16%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 25% 16%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 350 78% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 22% 20%;
+    --secondary-foreground: 240 13% 73%;
+    --muted: 240 22% 20%;
+    --muted-foreground: 240 9% 51%;
+    --accent: 350 78% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 350 78% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 20% 24%;
+    --input: 240 20% 24%;
+    --ring: 350 78% 58%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-white font-inter antialiased;
+    background: #100b0e;
+    min-width: 320px;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html,
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@layer components {
+  .food-theme-bg {
+    background:
+      /* Watermelon red to night blue gradient */
+      linear-gradient(175deg,
+        #E83F4D 0%,
+        #1A1A2E 100%
+      ),
+      /* Red glow from top */
+      radial-gradient(ellipse 80% 35% at 50% -5%,
+        rgba(232, 63, 77, 0.15) 0%,
+        rgba(200, 50, 60, 0.08) 25%,
+        transparent 55%
+      ),
+      /* Blue depth overlay at bottom */
+      radial-gradient(ellipse 50% 40% at 70% 85%,
+        rgba(26, 26, 46, 0.10) 0%,
+        transparent 50%
+      ),
+      /* Subtle grid for texture */
+      repeating-linear-gradient(0deg, transparent 0, transparent 47px, rgba(232, 63, 77, 0.02) 48px),
+      repeating-linear-gradient(90deg, transparent 0, transparent 47px, rgba(26, 26, 46, 0.015) 48px);
+  }
+  .screen-surface {
+    background: rgba(20, 12, 14, 0.60);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .glass-card {
+    @apply bg-glass-bg border border-glass-border rounded-2xl backdrop-blur-xl;
+  }
+  .glass-card-hover:hover {
+    @apply border-glass-border-hover bg-[rgba(255,255,255,0.09)] shadow-glass-hover;
+  }
+  .food-gradient {
+    background: linear-gradient(135deg, #FF7043, #E83F4D);
+  }
+  .purple-gradient {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  }
+  .blue-gradient {
+    background: linear-gradient(135deg, #3B82F6, #06B6D4);
+  }
+  .green-gradient {
+    background: linear-gradient(135deg, #10B981, #059669);
+  }
+  .gold-gradient {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #FF9B4A, #FF4F55);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .shimmer {
+    background: linear-gradient(90deg, #1E1E36 25%, #282848 50%, #1E1E36 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite ease-in-out;
+  }
+  .text-shadow-token {
+    text-shadow: 0 0 40px rgba(232, 63, 77, 0.5), 0 0 80px rgba(232, 63, 77, 0.2);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-screen > .h-full > :where(div:not(.absolute):not(.fixed), section, header, main, form, nav) {
+    width: min(100%, 1120px);
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
