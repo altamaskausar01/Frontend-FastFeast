@@ -3,7 +3,8 @@ import type { MenuItem } from '@/types';
 
 export interface MenuItemDTO extends Omit<MenuItem, 'id' | 'canteenId'> {
   _id: string;
-  canteenId: string;
+  /** Can be a plain string ID or a populated canteen object from Mongoose */
+  canteenId: string | { _id: string; id?: string; name?: string };
   sortOrder?: number;
   customizationOptions?: {
     name: string;
@@ -12,10 +13,20 @@ export interface MenuItemDTO extends Omit<MenuItem, 'id' | 'canteenId'> {
   }[];
 }
 
+/** Safely extract a string ID from a value that could be a string or populated object */
+export function extractStringId(value: unknown): string {
+  if (typeof value === 'object' && value !== null) {
+    return (value as { _id?: string; id?: string })._id
+      || (value as { _id?: string; id?: string }).id
+      || '';
+  }
+  return String(value ?? '');
+}
+
 export function normalizeMenuItem(dto: MenuItemDTO): MenuItem {
   return {
     id: dto._id,
-    canteenId: dto.canteenId,
+    canteenId: extractStringId(dto.canteenId),
     category: dto.category,
     name: dto.name,
     description: dto.description,

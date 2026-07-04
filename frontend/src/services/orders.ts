@@ -1,5 +1,6 @@
 import { get, post, patch } from './api';
 import type { Order, CartItem } from '@/types';
+import { extractStringId } from './menu';
 
 export interface PlaceOrderRequest {
   canteenId: string;
@@ -17,7 +18,8 @@ export interface OrderDTO {
   _id: string;
   token: string;
   userId: string;
-  canteenId: string;
+  /** Can be a plain string ID or a populated canteen object from Mongoose */
+  canteenId: string | { _id: string; id?: string; name?: string };
   canteenName: string;
   items: {
     menuItemId: string;
@@ -45,8 +47,7 @@ export interface OrderDTO {
 export function normalizeOrder(dto: OrderDTO): Order {
   return {
     id: dto._id,
-    token: dto.token,
-    canteenId: dto.canteenId,
+    token: dto.token,    canteenId: extractStringId(dto.canteenId),
     canteenName: dto.canteenName,
     items: dto.items.map((item) => ({
       id: item.menuItemId,
@@ -55,11 +56,11 @@ export function normalizeOrder(dto: OrderDTO): Order {
       quantity: item.quantity,
       image: item.image || '',
       description: item.specialNotes || '',
-      canteenId: dto.canteenId,
-      category: '',
-      prepTime: '',
-      isVeg: true,
-      inStock: true,
+      canteenId: extractStringId(dto.canteenId),
+    category: '',
+    prepTime: '',
+    isVeg: true,
+    inStock: true,
     })) as CartItem[],
     total: dto.subtotal,
     gst: dto.gst,
