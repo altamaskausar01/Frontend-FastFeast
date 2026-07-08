@@ -57,7 +57,7 @@ Fast Feast digitizes the entire ordering workflow: browse canteens and menus →
 | Accept / reject / mark-ready actions | Pause new orders toggle |
 | Group order indicators | Filterable order list |
 
-### 🛠️ Admin Panel
+### 🛠️Admin Panel
 | Feature | Details |
 |---------|---------|
 | KPI cards (users, orders, revenue, canteens) | Revenue overview |
