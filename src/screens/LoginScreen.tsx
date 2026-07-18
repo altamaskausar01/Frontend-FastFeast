@@ -72,12 +72,12 @@ export default function LoginScreen() {
   };
 
   return (
-    <div className="screen-surface h-full flex flex-col px-5 py-8 relative overflow-y-auto no-scrollbar">
+    <div className="screen-surface h-full flex flex-col px-5 md:px-8 lg:px-12 py-8 relative overflow-y-auto no-scrollbar">
       <div className="absolute inset-x-0 top-0 h-64 pointer-events-none bg-gradient-to-b from-[#E83F4D]/15 via-[#B8303E]/6 to-transparent" />
       <div className="absolute top-[40%] right-[5%] w-[250px] h-[250px] rounded-full bg-[#E83F4D]/8 blur-[80px] pointer-events-none" />
       <div className="absolute bottom-[20%] left-[10%] w-[200px] h-[200px] rounded-full bg-[#1A1A2E]/6 blur-[70px] pointer-events-none" />
 
-      <div className="relative flex-1 flex flex-col justify-center w-full max-w-[420px] mx-auto">
+      <div className="relative flex-1 flex flex-col justify-center w-full max-w-[420px] lg:max-w-[480px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ export default function LoginScreen() {
           <div className="w-16 h-16 rounded-2xl food-gradient flex items-center justify-center shadow-glow-orange">
             <UtensilsCrossed size={30} className="text-white" />
           </div>
-          <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-white leading-tight">
+          <h1 className="mt-5 text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Fast <span className="text-[#FF6B35]">Feast</span>
           </h1>
           <p className="mt-2 text-sm text-[#A0A0A0] leading-relaxed">

@@ -29,7 +29,7 @@ export function normalizeCanteen(dto: CanteenDTO): Canteen {
 
 export interface CanteenWithMenu {
   canteen: CanteenDTO;
-  menuItems: import('@/types').MenuItem[];
+  menuItems: import('./menu').MenuItemDTO[];
 }
 
 export function getAllCanteens(params?: Record<string, string>) {

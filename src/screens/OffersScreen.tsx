@@ -65,15 +65,15 @@ export default function OffersScreen() {
   return (
     <div className="screen-surface h-full flex flex-col overflow-y-auto no-scrollbar">
       {/* Header */}
-      <div className="pt-4 px-4 pb-3">
-        <h1 className="text-2xl font-bold text-white tracking-tight">Offers & Rewards</h1>
+      <div className="pt-4 px-4 md:px-6 lg:px-8 pb-3">
+        <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Offers & Rewards</h1>
       </div>
 
       {/* Streak Card */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mx-4 rounded-3xl p-5 border border-amber-500/20"
+        className="mx-4 md:mx-6 lg:mx-8 rounded-3xl p-5 md:p-6 border border-amber-500/20"
         style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.08), rgba(217,119,6,0.04))' }}
       >
         <div className="flex items-center gap-3">
@@ -107,9 +107,9 @@ export default function OffersScreen() {
       </motion.div>
 
       {/* Daily Deals */}
-      <div className="px-4 mt-6">
-        <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-1.5">
-          <Flame size={14} className="text-[#FF6B35]" /> Today&apos;s Deals
+      <div className="px-4 md:px-6 lg:px-8 mt-6">
+        <h3 className="text-sm md:text-base font-semibold text-white mb-3 flex items-center gap-1.5">
+          <Flame size={14} className="text-[#D94A5A]" /> Today&apos;s Deals
         </h3>
         <div className="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2">
           {offers.map((offer, i) => (
@@ -118,7 +118,7 @@ export default function OffersScreen() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 + i * 0.1 }}
-              className={`snap-start flex-shrink-0 w-[260px] h-[160px] rounded-2xl p-4 bg-gradient-to-br ${offer.gradient} relative overflow-hidden`}
+              className={`snap-start flex-shrink-0 w-[230px] xs:w-[260px] sm:w-[280px] h-[150px] xs:h-[160px] rounded-2xl p-4 bg-gradient-to-br ${offer.gradient} relative overflow-hidden`}
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-8 translate-x-8" />
               <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-full translate-y-6 -translate-x-6" />
@@ -149,8 +149,8 @@ export default function OffersScreen() {
       </div>
 
       {/* Mystery Reward */}
-      <div className="px-4 mt-6">
-        <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-1.5">
+      <div className="px-4 md:px-6 lg:px-8 mt-6">
+        <h3 className="text-sm md:text-base font-semibold text-white mb-3 flex items-center gap-1.5">
           <Gift size={14} className="text-purple-400" /> Mystery Reward
         </h3>
         <div className="bg-card rounded-2xl p-6 flex flex-col items-center text-center">
@@ -196,7 +196,7 @@ export default function OffersScreen() {
                 >
                   ✨
                 </motion.div>
-                <h4 className="text-xl font-bold text-[#FF6B35]">{mysteryReward?.name}</h4>
+                <h4 className="text-xl font-bold text-[#D94A5A]">{mysteryReward?.name}</h4>
                 <p className="text-xs text-[#A0A0A0] mt-1">{mysteryReward?.amount}</p>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
@@ -211,8 +211,8 @@ export default function OffersScreen() {
       </div>
 
       {/* Coupons */}
-      <div className="px-4 mt-6 pb-24">
-        <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-1.5">
+      <div className="px-4 md:px-6 lg:px-8 mt-6 pb-6">
+        <h3 className="text-sm md:text-base font-semibold text-white mb-3 flex items-center gap-1.5">
           <Sparkles size={14} className="text-yellow-400" /> Available Coupons
         </h3>
         <div className="space-y-2">
@@ -222,10 +222,10 @@ export default function OffersScreen() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + i * 0.08 }}
-              className="bg-card rounded-2xl p-4 flex items-center gap-3 border-l-2 border-dashed border-l-[#FF6B35]/40"
+              className="bg-card rounded-2xl p-4 flex items-center gap-3 border-l-2 border-dashed border-l-[#D94A5A]/40"
             >
               <div className="flex-1">
-                <p className="text-lg font-bold text-[#FF6B35]">{coupon.discount}</p>
+                <p className="text-lg font-bold text-[#D94A5A]">{coupon.discount}</p>
                 <p className="text-xs text-[#A0A0A0]">{coupon.description}</p>
                 <div className="mt-1.5 inline-flex px-2 py-0.5 rounded bg-card-elevated">
                   <span className="text-[10px] text-[#A0A0A0] font-mono">{coupon.code}</span>
@@ -234,7 +234,7 @@ export default function OffersScreen() {
               <motion.button
                 whileTap={{ scale: 0.92 }}
                 onClick={() => handleCopyCoupon(coupon.code)}
-                className="px-3 py-1.5 rounded-full bg-card-elevated text-[#FF6B35] text-xs font-medium flex items-center gap-1"
+                className="px-3 py-1.5 rounded-full bg-card-elevated text-[#D94A5A] text-xs font-medium flex items-center gap-1"
               >
                 {copiedCoupon === coupon.code ? <Check size={12} /> : <Copy size={12} />}
                 {copiedCoupon === coupon.code ? 'Copied' : 'Copy'}

@@ -119,7 +119,7 @@ export default function OrderSuccessScreen() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2 }}
-        className="mx-4 mt-5 glass-card p-4"
+        className="mx-4 md:mx-6 lg:mx-8 mt-5 glass-card p-4"
       >
         <p className="text-sm font-semibold text-white">Main Canteen</p>
         <div className="mt-2 space-y-1">
@@ -166,7 +166,7 @@ export default function OrderSuccessScreen() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.4 }}
-        className="px-4 mt-6 pb-8 space-y-3"
+        className="px-4 md:px-6 lg:px-8 mt-6 pb-8 space-y-3 max-w-md mx-auto w-full"
       >
         <motion.button
           whileTap={{ scale: 0.97 }}

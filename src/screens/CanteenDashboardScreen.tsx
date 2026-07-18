@@ -75,10 +75,10 @@ export default function CanteenDashboardScreen() {
   return (
     <div className="screen-surface h-full flex flex-col overflow-y-auto no-scrollbar">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 pt-4 pb-3">
+      <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 pt-4 pb-3">
         <div>
-          <h1 className="text-xl font-bold text-white">Canteen Panel</h1>
-          <p className="text-[10px] text-[#6B6B6B]">Main Canteen</p>
+          <h1 className="text-xl md:text-2xl font-bold text-white">Canteen Panel</h1>
+          <p className="text-[10px] md:text-xs text-[#6B6B6B]">Main Canteen</p>
         </div>
         <div className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
@@ -90,7 +90,7 @@ export default function CanteenDashboardScreen() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="px-4 grid grid-cols-4 gap-2"
+        className="px-4 md:px-6 lg:px-8 grid grid-cols-4 gap-2 md:gap-3"
       >
         {[
           { key: 'new', label: 'New', color: 'text-[#FF6B35]' },
@@ -119,7 +119,7 @@ export default function CanteenDashboardScreen() {
       </motion.div>
 
       {/* Peak Load */}
-      <div className="px-4 mt-3">
+      <div className="px-4 md:px-6 lg:px-8 mt-3">
         <div className="flex items-center justify-between mb-1">
           <span className="text-[10px] text-[#6B6B6B]">Load</span>
           <span className="text-[10px] text-amber-400">65% — Busy</span>
@@ -136,7 +136,7 @@ export default function CanteenDashboardScreen() {
       </div>
 
       {/* Pause Toggle */}
-      <div className="px-4 mt-3 flex items-center justify-between bg-card rounded-xl p-3">
+      <div className="px-4 md:px-6 lg:px-8 mt-3 flex items-center justify-between bg-card rounded-xl p-3 max-w-sm">
         <span className="text-sm text-white font-medium">Pause New Orders</span>
         <motion.button
           whileTap={{ scale: 0.9 }}
@@ -161,7 +161,7 @@ export default function CanteenDashboardScreen() {
       )}
 
       {/* Tabs */}
-      <div className="px-4 mt-4">
+      <div className="px-4 md:px-6 lg:px-8 mt-4">
         <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
           {tabs.map(tab => (
             <button
@@ -181,7 +181,7 @@ export default function CanteenDashboardScreen() {
       </div>
 
       {/* Order List */}
-      <div className="px-4 mt-3 pb-6 space-y-2">
+      <div className="px-4 md:px-6 lg:px-8 mt-3 pb-6 space-y-2">
         <AnimatePresence mode="wait">
           {filteredOrders.map((order, i) => (
             <motion.div
@@ -225,7 +225,7 @@ export default function CanteenDashboardScreen() {
       </div>
 
       {/* Manage Menu Link */}
-      <div className="px-4 pb-6">
+      <div className="px-4 md:px-6 lg:px-8 pb-6">
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={() => showToast('Menu management - Coming soon!')}

@@ -101,7 +101,7 @@ export default function SplashScreen() {
         transition={{ delay: 0.6, duration: 0.3 }}
         className="mt-8 text-center"
       >
-        <h1 className="text-3xl font-extrabold tracking-tight text-white">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
           Fast <span className="text-[#FF6B35]">Feast</span>
         </h1>
       </motion.div>

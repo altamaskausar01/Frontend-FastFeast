@@ -9,7 +9,6 @@ import type { Canteen } from '@/types';
 export default function AdminScreen() {
   const { showToast } = useApp();
   const [refreshing, setRefreshing] = useState(false);
-  const [tooltipIndex, setTooltipIndex] = useState<number | null>(null);
   const [stats, setStats] = useState<{
     totalUsers: number;
     totalOrders: number;
@@ -61,10 +60,10 @@ export default function AdminScreen() {
   return (
     <div className="screen-surface h-full flex flex-col overflow-y-auto no-scrollbar">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 pt-4 pb-3">
+      <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 pt-4 pb-3">
         <div>
-          <h1 className="text-xl font-bold text-white">Admin Panel</h1>
-          <p className="text-[10px] text-[#6B6B6B]">
+          <h1 className="text-xl md:text-2xl font-bold text-white">Admin Panel</h1>
+          <p className="text-[10px] md:text-xs text-[#6B6B6B]">
             {new Date().toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' })}
           </p>
         </div>
@@ -78,7 +77,7 @@ export default function AdminScreen() {
       </div>
 
       {/* KPI Cards */}
-      <div className="px-4 grid grid-cols-2 gap-2">
+      <div className="px-4 md:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
         {kpiData.map((kpi, i) => (
           <motion.div
             key={kpi.key}
@@ -119,7 +118,7 @@ export default function AdminScreen() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="mx-4 mt-4 bg-card rounded-2xl p-4"
+        className="mx-4 md:mx-6 lg:mx-8 mt-4 bg-card rounded-2xl p-4 md:p-5"
       >
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold text-white">Revenue Overview</h3>
@@ -138,7 +137,7 @@ export default function AdminScreen() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="mx-4 mt-4 bg-card rounded-2xl overflow-hidden"
+        className="mx-4 md:mx-6 lg:mx-8 mt-4 bg-card rounded-2xl overflow-hidden"
       >
         <div className="flex items-center justify-between p-4 pb-2">
           <h3 className="text-sm font-semibold text-white">Canteens</h3>
@@ -184,7 +183,7 @@ export default function AdminScreen() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="px-4 mt-4"
+        className="px-4 md:px-6 lg:px-8 mt-4"
       >
         <h3 className="text-sm font-semibold text-white mb-3">Quick Actions</h3>
         <div className="grid grid-cols-2 gap-2">
@@ -214,7 +213,7 @@ export default function AdminScreen() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
-        className="mx-4 mt-4 mb-8 bg-card rounded-2xl p-4"
+        className="mx-4 md:mx-6 lg:mx-8 mt-4 mb-8 bg-card rounded-2xl p-4"
       >
         <h3 className="text-sm font-semibold text-white mb-3">Recent Activity</h3>
         <p className="text-xs text-[#6B6B6B] text-center py-6">

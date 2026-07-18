@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, ChevronDown, ChevronUp, Clock, CheckCircle2, XCircle } from 'lucide-react';
 import { useApp } from '@/hooks/useAppContext';
-import { getOrders, normalizeOrder, type OrderDTO } from '@/services/orders';
+import { getOrders, normalizeOrder } from '@/services/orders';
 import type { Order } from '@/types';
 
 const statusConfig = {
@@ -41,12 +41,14 @@ export default function OrdersScreen() {
   const displayOrders = activeTab === 'active' ? activeOrders : pastOrdersList;
 
   const handleReorder = (orderId: string) => {
+    setReordering(orderId);
     const order = allOrders.find(o => o.id === orderId);
     if (order) {
       dispatch({ type: 'REORDER', order });
       showToast('Items added to cart!');
       navigate('cart', 'modal');
     }
+    setTimeout(() => setReordering(null), 1000);
   };
 
   const handleTrack = (orderId: string) => {
@@ -60,8 +62,8 @@ export default function OrdersScreen() {
   return (
     <div className="screen-surface h-full flex flex-col overflow-y-auto no-scrollbar">
       {/* Header */}
-      <div className="pt-4 px-4 pb-3">
-        <h1 className="text-2xl font-bold text-white tracking-tight">My Orders</h1>
+      <div className="pt-4 px-4 md:px-6 lg:px-8 pb-3">
+        <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">My Orders</h1>
       </div>
 
       {/* Active Order Banner */}
@@ -69,7 +71,7 @@ export default function OrdersScreen() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mx-4 mb-4 bg-card rounded-2xl p-4 border-2 border-transparent"
+          className="mx-4 md:mx-6 lg:mx-8 mb-4 bg-card rounded-2xl p-4 border-2 border-transparent"
           style={{ borderImage: 'linear-gradient(135deg, #FF6B35, #FF3B3B) 1', borderRadius: '16px' }}
         >
           <div className="flex items-center justify-between">
@@ -93,8 +95,8 @@ export default function OrdersScreen() {
       )}
 
       {/* Tabs */}
-      <div className="px-4 mb-3">
-        <div className="flex gap-2">
+      <div className="px-4 md:px-6 lg:px-8 mb-3">
+        <div className="flex gap-2 max-w-md">
           {(['active', 'past'] as const).map(tab => (
             <button
               key={tab}
@@ -117,7 +119,7 @@ export default function OrdersScreen() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="px-4 pb-24 space-y-2"
+          className="px-4 md:px-6 lg:px-8 pb-6 space-y-2"
         >
           {loading ? (
             <div className="text-center py-12">

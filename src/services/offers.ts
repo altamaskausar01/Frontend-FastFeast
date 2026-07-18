@@ -1,8 +1,14 @@
 import { get, post } from './api';
 import type { Offer } from '@/types';
 
-export interface OfferDTO extends Omit<Offer, 'id'> {
+export interface OfferDTO {
   _id: string;
+  title: string;
+  discount: string;
+  description: string;
+  validUntil: string;
+  code: string;
+  gradient: string;
   claimed: number;
   maxClaims?: number;
   isActive: boolean;

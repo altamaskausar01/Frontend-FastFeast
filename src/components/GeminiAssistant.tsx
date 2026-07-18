@@ -101,21 +101,11 @@ export default function GeminiAssistant() {
   ]);
   const nextId = useRef(2);
 
-  const hidden = ['splash', 'onboarding', 'login', 'canteenDashboard', 'admin'].includes(state.screen);
-  const hasBottomNav = ['home', 'orders', 'offers', 'groupOrder', 'profile'].includes(state.screen);
-  const hasCartBar = hasBottomNav && state.cart.length > 0;
-  const positionClass = useMemo(() => {
-    if (hasCartBar) return 'bottom-44';
-    if (hasBottomNav) return 'bottom-24';
-    return 'bottom-4';
-  }, [hasBottomNav, hasCartBar]);
-  const panelHeightClass = useMemo(() => {
-    if (hasCartBar) return 'h-[min(520px,calc(100dvh-16rem))]';
-    if (hasBottomNav) return 'h-[min(520px,calc(100dvh-11rem))]';
-    return 'h-[min(520px,calc(100dvh-6rem))]';
-  }, [hasBottomNav, hasCartBar]);
-
-  if (hidden) return null;
+  const hasCartBar = state.cart.length > 0;
+  const panelMaxHeight = useMemo(() => {
+    if (hasCartBar) return 'h-[min(420px,calc(100dvh-200px))]';
+    return 'h-[min(420px,calc(100dvh-100px))]';
+  }, [hasCartBar]);
 
   const sendMessage = async (text: string) => {
     const trimmed = text.trim();
@@ -147,7 +137,7 @@ export default function GeminiAssistant() {
   };
 
   return (
-    <div className={`absolute ${positionClass} right-3 sm:right-5 z-[60] pointer-events-none`}>
+    <div className="fixed bottom-[80px] right-3 sm:right-5 z-[60] pointer-events-none flex flex-col items-end">
       <AnimatePresence>
         {isOpen && (
           <motion.section
@@ -156,7 +146,7 @@ export default function GeminiAssistant() {
             exit={{ opacity: 0, y: 14, scale: 0.97 }}
             transition={{ duration: 0.2 }}
             aria-label="Gemini food assistant"
-            className={`pointer-events-auto absolute bottom-16 right-0 w-[calc(100vw-1.5rem)] max-w-[380px] ${panelHeightClass} overflow-hidden rounded-2xl border border-[#FFD6BC]/15 bg-[#1C1217]/95 shadow-[0_24px_70px_rgba(0,0,0,0.55)] backdrop-blur-xl flex flex-col`}
+            className={`pointer-events-auto w-[calc(100vw-1.5rem)] max-w-[380px] ${panelMaxHeight} overflow-hidden rounded-2xl border border-[#D94A5A]/12 bg-[#1C1217]/95 shadow-[0_24px_70px_rgba(0,0,0,0.55)] backdrop-blur-xl flex flex-col mb-3`}
           >
             <header className="flex items-center justify-between px-4 py-3 border-b border-white/[0.08] bg-[#2B1A22]">
               <div className="flex items-center gap-3 min-w-0">
@@ -192,7 +182,7 @@ export default function GeminiAssistant() {
               ))}
               {isThinking && (
                 <div className="flex items-center gap-2 text-[11px] text-[#C4B7B0]">
-                  <LoaderCircle size={14} className="animate-spin text-[#FF7043]" />
+                  <LoaderCircle size={14} className="animate-spin text-[#D94A5A]" />
                   Finding a tasty match...
                 </div>
               )}
@@ -205,7 +195,7 @@ export default function GeminiAssistant() {
                   type="button"
                   onClick={() => void sendMessage(prompt)}
                   disabled={isThinking}
-                  className="whitespace-nowrap px-3 py-1.5 rounded-full border border-[#FF7043]/30 bg-[#FF7043]/10 text-[10px] font-medium text-[#FFC1A8] disabled:opacity-50"
+                  className="whitespace-nowrap px-3 py-1.5 rounded-full border border-[#D94A5A]/30 bg-[#D94A5A]/10 text-[10px] font-medium text-[#E8A0A8] disabled:opacity-50"
                 >
                   {prompt}
                 </button>
@@ -218,7 +208,7 @@ export default function GeminiAssistant() {
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Ask about food..."
                 aria-label="Message Gemini food assistant"
-                className="min-w-0 flex-1 h-11 rounded-xl border border-white/[0.08] bg-[#140D10] px-3 text-sm text-white placeholder:text-[#887A74] outline-none focus:border-[#FF7043]/60"
+                className="min-w-0 flex-1 h-11 rounded-xl border border-white/[0.08] bg-[#140D10] px-3 text-sm text-white placeholder:text-[#887A74] outline-none focus:border-[#D94A5A]/60"
               />
               <button
                 type="submit"
@@ -233,15 +223,17 @@ export default function GeminiAssistant() {
         )}
       </AnimatePresence>
 
-      <motion.button
-        type="button"
-        onClick={() => setIsOpen((open) => !open)}
-        whileTap={{ scale: 0.92 }}
-        aria-label={isOpen ? 'Close Gemini food assistant' : 'Open Gemini food assistant'}
-        className="pointer-events-auto ml-auto w-14 h-14 rounded-full food-gradient text-white shadow-[0_10px_30px_rgba(232,63,77,0.35)] flex items-center justify-center border border-white/20"
-      >
-        {isOpen ? <X size={22} /> : <Bot size={23} />}
-      </motion.button>
+      {!isOpen && (
+        <motion.button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          whileTap={{ scale: 0.92 }}
+          aria-label="Open Gemini food assistant"
+          className="pointer-events-auto w-14 h-14 rounded-full food-gradient text-white shadow-[0_10px_30px_rgba(217,74,90,0.35)] flex items-center justify-center border border-white/20"
+        >
+          <Bot size={23} />
+        </motion.button>
+      )}
     </div>
   );
 }

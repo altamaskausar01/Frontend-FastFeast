@@ -6,25 +6,25 @@
 
 @layer base {
   :root {
-    --background: 240 27% 11%;
+    --background: 345 27% 6%;
     --foreground: 0 0% 100%;
-    --card: 240 25% 16%;
+    --card: 345 25% 12%;
     --card-foreground: 0 0% 100%;
-    --popover: 240 25% 16%;
+    --popover: 345 25% 12%;
     --popover-foreground: 0 0% 100%;
-    --primary: 350 78% 58%;
+    --primary: 350 55% 54%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 22% 20%;
-    --secondary-foreground: 240 13% 73%;
-    --muted: 240 22% 20%;
-    --muted-foreground: 240 9% 51%;
-    --accent: 350 78% 58%;
+    --secondary: 345 22% 18%;
+    --secondary-foreground: 345 13% 73%;
+    --muted: 345 22% 18%;
+    --muted-foreground: 345 9% 50%;
+    --accent: 350 55% 54%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 350 78% 58%;
+    --destructive: 350 55% 54%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 20% 24%;
-    --input: 240 20% 24%;
-    --ring: 350 78% 58%;
+    --border: 345 20% 20%;
+    --input: 345 20% 20%;
+    --ring: 350 55% 54%;
     --radius: 0.75rem;
   }
 
@@ -66,30 +66,40 @@
 @layer components {
   .food-theme-bg {
     background:
-      /* Watermelon red to night blue gradient */
-      linear-gradient(175deg,
-        #E83F4D 0%,
-        #1A1A2E 100%
+      /* Deep wine velvet base */
+      linear-gradient(182deg,
+        #12080D 0%,
+        #0D060A 30%,
+        #0A0508 60%,
+        #080306 100%
       ),
-      /* Red glow from top */
-      radial-gradient(ellipse 80% 35% at 50% -5%,
-        rgba(232, 63, 77, 0.15) 0%,
-        rgba(200, 50, 60, 0.08) 25%,
-        transparent 55%
-      ),
-      /* Blue depth overlay at bottom */
-      radial-gradient(ellipse 50% 40% at 70% 85%,
-        rgba(26, 26, 46, 0.10) 0%,
+      /* Subtle wine-red glow at top */
+      radial-gradient(ellipse 80% 30% at 50% -5%,
+        rgba(200, 60, 80, 0.07) 0%,
+        rgba(150, 35, 55, 0.035) 25%,
         transparent 50%
       ),
-      /* Subtle grid for texture */
-      repeating-linear-gradient(0deg, transparent 0, transparent 47px, rgba(232, 63, 77, 0.02) 48px),
-      repeating-linear-gradient(90deg, transparent 0, transparent 47px, rgba(26, 26, 46, 0.015) 48px);
+      /* Deep rose accent at bottom */
+      radial-gradient(ellipse 60% 35% at 50% 100%,
+        rgba(120, 25, 55, 0.06) 0%,
+        transparent 50%
+      ),
+      /* Very subtle sheen */
+      radial-gradient(ellipse 40% 10% at 30% 40%,
+        rgba(200, 80, 90, 0.004) 0%,
+        transparent 50%
+      ),
+      /* Micro texture grid */
+      repeating-linear-gradient(0deg, transparent 0, transparent 47px, rgba(200, 60, 80, 0.006) 48px),
+      repeating-linear-gradient(90deg, transparent 0, transparent 47px, rgba(200, 60, 80, 0.003) 48px);
   }
   .screen-surface {
-    background: rgba(20, 12, 14, 0.60);
+    background: rgba(15, 8, 12, 0.65);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
+  }
+  .wine-glow {
+    box-shadow: 0 0 20px rgba(200, 60, 80, 0.15), 0 0 40px rgba(200, 60, 80, 0.05);
   }
   .glass-card {
     @apply bg-glass-bg border border-glass-border rounded-2xl backdrop-blur-xl;
@@ -98,7 +108,7 @@
     @apply border-glass-border-hover bg-[rgba(255,255,255,0.09)] shadow-glass-hover;
   }
   .food-gradient {
-    background: linear-gradient(135deg, #FF7043, #E83F4D);
+    background: linear-gradient(135deg, #D94A5A, #B83042);
   }
   .purple-gradient {
     background: linear-gradient(135deg, #6366F1, #8B5CF6);
@@ -136,12 +146,130 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  .max-w-screen-xs {
+    max-width: 360px;
+  }
+  .max-w-screen-sm {
+    max-width: 640px;
+  }
+  .max-w-screen-md {
+    max-width: 768px;
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
+
+/* ========== RESPONSIVE UTILITIES ========== */
+
+/* Responsive content container - use as inner wrapper for screen content */
+.responsive-content {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 640px) {
+  .responsive-content {
+    max-width: 640px;
+  }
 }
 
 @media (min-width: 768px) {
-  .responsive-screen > .h-full > :where(div:not(.absolute):not(.fixed), section, header, main, form, nav) {
+  .responsive-content {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-content {
+    max-width: 960px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-content {
+    max-width: 1120px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Responsive grid: auto-fill cards on larger screens */
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .responsive-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .responsive-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+@media (min-width: 1024px) {
+  .responsive-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Responsive padding utility */
+.responsive-px {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 768px) {
+  .responsive-px {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media (min-width: 1280px) {
+  .responsive-px {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Small phone safety */
+@media (max-width: 359px) {
+  .food-theme-bg {
+    border-radius: 0 !important;
+  }
+  .screen-surface {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Tablet and above: center content with max-width */
+@media (min-width: 768px) {
+  .responsive-screen > .h-full > :where(div:not(.absolute):not(.fixed):not(.sticky):not([role="dialog"]), section, header, main, form, nav) {
     width: min(100%, 1120px);
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+}
+
+/* Desktop large: wider content area */
+@media (min-width: 1280px) {
+  .responsive-screen > .h-full > :where(div:not(.absolute):not(.fixed):not(.sticky):not([role="dialog"]), section, header, main, form, nav) {
+    width: min(100%, 1280px);
   }
 }

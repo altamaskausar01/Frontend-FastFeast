@@ -4,7 +4,6 @@ import BottomNav from '@/components/BottomNav';
 import Toast from '@/components/Toast';
 import StickyCartBar from '@/components/StickyCartBar';
 import GeminiAssistant from '@/components/GeminiAssistant';
-import FloatingFoodParticles from '@/components/FloatingFoodParticles';
 import SplashScreen from '@/screens/SplashScreen';
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import LoginScreen from '@/screens/LoginScreen';
@@ -96,7 +95,7 @@ function AppShell() {
   return (
     <div className="min-h-[100dvh] w-full bg-[#100B0E] flex justify-center items-stretch p-0 md:p-4">
       {/* Responsive app container */}
-      <div className="food-theme-bg w-full h-[100dvh] md:h-[calc(100dvh-2rem)] md:max-w-[1120px] xl:max-w-[1280px] rounded-none md:rounded-2xl overflow-hidden shadow-2xl relative isolate flex flex-col"
+      <div className="food-theme-bg w-full h-[100dvh] md:h-[calc(100dvh-2rem)] md:max-w-[1120px] lg:max-w-[1024px] xl:max-w-[1280px] rounded-none md:rounded-2xl overflow-hidden shadow-2xl relative isolate flex flex-col"
         style={{ boxShadow: '0 0 0 1px rgba(232, 63, 77, 0.08), 0 0 60px rgba(232, 63, 77, 0.04), 0 25px 80px rgba(0, 0, 0, 0.5)' }}
       >
         {/* Main content area */}
@@ -110,14 +109,11 @@ function AppShell() {
         {/* Bottom Navigation */}
         {showNav && <BottomNav />}
 
-        {/* Menu-aware food assistant */}
-        <GeminiAssistant />
-
         {/* Toast Notifications */}
         <Toast />
 
-        {/* Floating food particles background - always visible */}
-        <FloatingFoodParticles />
+        {/* Gemini Food Assistant - only on home screen, fixed below nav */}
+        {state.screen === 'home' && <GeminiAssistant />}
       </div>
     </div>
   );

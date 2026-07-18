@@ -102,15 +102,15 @@ export default function ProfileScreen() {
   return (
     <div className="screen-surface h-full flex flex-col overflow-y-auto no-scrollbar">
       {/* Header */}
-      <div className="pt-4 px-4 pb-3">
-        <h1 className="text-2xl font-bold text-white tracking-tight">Profile</h1>
+      <div className="pt-4 px-4 md:px-6 lg:px-8 pb-3">
+        <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Profile</h1>
       </div>
 
       {/* Profile Card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center px-4"
+        className="flex flex-col items-center px-4 md:px-6 lg:px-8"
       >
         <div className="relative">
           <div className="w-20 h-20 rounded-full food-gradient p-[3px]">
@@ -134,7 +134,7 @@ export default function ProfileScreen() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="mx-4 mt-5 glass-card p-4 flex items-center gap-4"
+        className="mx-4 md:mx-6 lg:mx-8 mt-5 glass-card p-4 md:p-5 flex items-center gap-4"
       >
         <div className="w-12 h-12 rounded-xl purple-gradient flex items-center justify-center">
           <Wallet size={24} className="text-white" />
@@ -156,7 +156,7 @@ export default function ProfileScreen() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="px-4 mt-4 grid grid-cols-3 gap-2.5"
+        className="px-4 md:px-6 lg:px-8 mt-4 grid grid-cols-3 gap-2.5 md:gap-3"
       >
         {[
           { label: 'Orders', value: String(state.user.totalOrders), sub: 'total', color: 'text-white' },
@@ -177,7 +177,7 @@ export default function ProfileScreen() {
       </motion.div>
 
       {/* Settings */}
-      <div className="px-4 mt-6 pb-8">
+      <div className="px-4 md:px-6 lg:px-8 mt-6 pb-8 max-w-2xl mx-auto w-full">
         {settingsGroups.map((group, gi) => (
           <motion.div
             key={group.title}

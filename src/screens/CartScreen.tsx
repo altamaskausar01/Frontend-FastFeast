@@ -25,7 +25,7 @@ export default function CartScreen() {
   return (
     <div className="screen-surface h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 pt-4 pb-3 flex-shrink-0">
+      <div className="flex items-center gap-3 px-4 md:px-6 lg:px-8 pt-4 pb-3 flex-shrink-0">
         <motion.button whileTap={{ scale: 0.92 }} onClick={goBack} className="w-10 h-10 rounded-full bg-card flex items-center justify-center">
           <ArrowLeft size={20} className="text-white" />
         </motion.button>
@@ -36,7 +36,7 @@ export default function CartScreen() {
       </div>
 
       {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto no-scrollbar px-4">
+      <div className="flex-1 overflow-y-auto no-scrollbar px-4 md:px-6 lg:px-8">
         {/* Cart Items */}
         <AnimatePresence>
           {state.cart.map((item) => (
@@ -49,7 +49,7 @@ export default function CartScreen() {
               className="bg-card rounded-2xl p-4 mb-2"
             >
               <div className="flex items-start gap-3">
-                <img src={item.image} alt={item.name} className="w-14 h-14 rounded-xl object-cover flex-shrink-0" />
+                <img src={item.image} alt={item.name} className="w-12 xs:w-14 h-12 xs:h-14 rounded-xl object-cover flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
                     <h4 className="text-sm font-semibold text-white truncate">{item.name}</h4>
@@ -152,7 +152,7 @@ export default function CartScreen() {
             </h3>
             <div className="flex gap-2 overflow-x-auto no-scrollbar">
               {suggestedCombos.map(combo => (
-                <div key={combo.id} className="flex-shrink-0 w-[200px] bg-card rounded-xl p-3">
+                <div key={combo.id} className="flex-shrink-0 w-[160px] xs:w-[180px] sm:w-[200px] bg-card rounded-xl p-3">
                   <p className="text-xs font-semibold text-white">{combo.name}</p>
                   <p className="text-[10px] text-[#6B6B6B] mt-0.5">{combo.items.join(' + ')}</p>
                   <div className="flex items-center justify-between mt-2">
@@ -182,7 +182,7 @@ export default function CartScreen() {
             transition={{ delay: 0.3 }}
             className="mt-4 bg-card rounded-2xl p-4"
           >
-            <div className="space-y-2">
+            <div className="space-y-2 max-w-xl mx-auto">
               <div className="flex justify-between text-sm">
                 <span className="text-[#A0A0A0]">Item Total</span>
                 <span className="text-white">₹{cartTotal}</span>
@@ -219,7 +219,7 @@ export default function CartScreen() {
 
       {/* Proceed Button */}
       {state.cart.length > 0 && (
-        <div className="flex-shrink-0 p-4 bg-page/95">
+        <div className="flex-shrink-0 p-4 md:px-6 lg:px-8 bg-page/95">
           <motion.button
             whileTap={{ scale: 0.97 }}
             onClick={handleProceed}

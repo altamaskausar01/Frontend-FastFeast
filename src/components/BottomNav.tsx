@@ -15,60 +15,84 @@ export default function BottomNav() {
   const { state, dispatch } = useApp();
 
   return (
-    <nav className="absolute bottom-0 left-0 right-0 z-50 flex justify-center">
-      <div className="w-full">
-        <div
-          style={{
-            background: 'rgba(16, 12, 28, 0.92)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            borderTop: '1px solid rgba(232, 63, 77, 0.08)',
-          }}
-        >
-          <div className="flex items-center justify-around sm:justify-center sm:gap-8 lg:gap-12 h-14 px-2">
-            {tabs.map((tab) => {
-              const isActive = state.activeTab === tab.key;
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.key}
-                  onClick={() => dispatch({ type: 'SET_TAB', tab: tab.key })}
-                  className="flex flex-col items-center justify-center gap-1 w-14 sm:w-20 h-14 relative"
-                >
+    <motion.nav
+      initial={{ y: 40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 25, delay: 0.1 }}
+      className="flex-shrink-0 w-full z-50"
+    >
+      <div
+        style={{
+          background: 'rgba(10, 5, 9, 0.97)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderTop: '1px solid rgba(217, 74, 90, 0.08)',
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        }}
+      >
+        <div className="flex items-center justify-around sm:justify-center sm:gap-6 md:gap-10 lg:gap-16 h-14 px-2 md:px-4">
+          {tabs.map((tab, index) => {
+            const isActive = state.activeTab === tab.key;
+            const Icon = tab.icon;
+            return (
+              <motion.button
+                key={tab.key}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.15 + index * 0.05, type: 'spring', stiffness: 260, damping: 20 }}
+                onClick={() => dispatch({ type: 'SET_TAB', tab: tab.key })}
+                className="flex flex-col items-center justify-center gap-1 w-14 sm:w-20 h-14 relative"
+              >
+                {/* Active background glow */}
+                {isActive && (
                   <motion.div
-                    animate={isActive ? { scale: 1.15 } : { scale: 1 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-                  >
-                    <Icon
-                      size={22}
-                      className={isActive ? 'text-white' : 'text-[#6B6B6B]'}
-                      strokeWidth={isActive ? 2.5 : 1.5}
-                    />
-                  </motion.div>
-                  <span
-                    className={`text-[10px] font-medium ${
-                      isActive ? 'text-white' : 'text-[#6B6B6B]'
-                    }`}
-                  >
-                    {tab.label}
-                  </span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTabDot"
-                      className="absolute -bottom-0.5 w-1 h-1 rounded-full food-gradient"
-                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                    />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-          <p className="h-5 flex items-center justify-center text-[9px] font-medium text-[#8F817A]">
-            © 2026 AKMH TEAM
-          </p>
+                    layoutId="activeTabBg"
+                    className="absolute inset-0 mx-auto w-10 h-10 rounded-xl"
+                    style={{
+                      background: 'rgba(217, 74, 90, 0.12)',
+                      filter: 'blur(4px)',
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                  />
+                )}
+                <motion.div
+                  animate={isActive ? { scale: 1.1, y: -1 } : { scale: 1, y: 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                  className="relative"
+                >
+                  <Icon
+                    size={20}
+                    strokeWidth={isActive ? 2.5 : 1.5}
+                    className={isActive ? 'text-white' : 'text-[#6B4D5A]'}
+                    style={isActive ? { filter: 'drop-shadow(0 0 6px rgba(217, 74, 90, 0.5))' } : {}}
+                  />
+                </motion.div>
+                <span
+                  className={`text-[10px] font-medium transition-colors duration-200 ${
+                    isActive ? 'text-white' : 'text-[#6B4D5A]'
+                  }`}
+                >
+                  {tab.label}
+                </span>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabIndicator"
+                    className="absolute -bottom-0.5 w-6 h-[2px] rounded-full"
+                    style={{
+                      background: 'linear-gradient(135deg, #D94A5A, #B83042)',
+                      boxShadow: '0 0 8px rgba(217, 74, 90, 0.5)',
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                  />
+                )}
+              </motion.button>
+            );
+          })}
         </div>
-        <div className="h-[env(safe-area-inset-bottom)] bg-[rgba(16,12,28,0.92)]" />
+        <p className="h-5 flex items-center justify-center text-[9px] font-medium text-[#5A3D48] tracking-wider">
+          © 2026 AKMH TEAM
+        </p>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

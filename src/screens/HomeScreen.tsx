@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Bell, Star, Clock, Plus, TrendingUp, Zap, ChevronRight } from 'lucide-react';
+import { Search, Bell, Star, Clock, TrendingUp, Zap, ChevronRight } from 'lucide-react';
 import { useApp } from '@/hooks/useAppContext';
 import { getAllCanteens, normalizeCanteen } from '@/services/canteens';
-import { getTrendingItems, getFastItems, type MenuItemDTO, normalizeMenuItem } from '@/services/menu';
+import { getTrendingItems, getFastItems, normalizeMenuItem } from '@/services/menu';
 import type { Canteen, MenuItem } from '@/types';
 
 const filters = ['All', 'Veg', 'Fast', 'Popular', 'Under ₹100', 'Beverages'];
@@ -59,10 +59,13 @@ export default function HomeScreen() {
   const greeting = useMemo(() => {
     const hour = new Date().getHours();
     const name = state.user.name.split(' ')[0];
+    if (hour < 5) return `Late night, ${name} 🌃`;
+    if (hour < 7) return `Rise and shine, ${name} 🌅`;
     if (hour < 12) return `Good morning, ${name} ☀️`;
-    if (hour < 17) return `Good afternoon, ${name} 👋`;
+    if (hour < 14) return `Lunch cravings, ${name} 🍽️`;
+    if (hour < 17) return `Good afternoon, ${name} ⛅`;
     if (hour < 21) return `Good evening, ${name} 🌙`;
-    return `Late night cravings, ${name}? 🌃`;
+    return `Night cravings, ${name} 🌃`;
   }, [state.user.name]);
 
   const handleCanteenTap = (id: string) => {
@@ -83,21 +86,21 @@ export default function HomeScreen() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="pt-4 px-4"
+        className="pt-4 px-4 md:px-6 lg:px-8"
       >
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between max-w-5xl mx-auto">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">{greeting}</h1>
-            <p className="text-sm text-[#A0A0A0] mt-0.5">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">{greeting}</h1>
+            <p className="text-sm md:text-base text-[#8A6A78] mt-0.5">
               {new Date().toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' })}
             </p>
           </div>
           <motion.button
             whileTap={{ scale: 0.92 }}
-            className="w-11 h-11 rounded-full bg-card flex items-center justify-center relative"
+            className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-card flex items-center justify-center relative"
           >
-            <Bell size={20} className="text-[#A0A0A0]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 rounded-full bg-[#FF3B3B]" />
+            <Bell size={20} className="text-[#8A6A78]" />
+            <span className="absolute top-2 right-2.5 w-2 h-2 rounded-full bg-[#D94A5A]" />
           </motion.button>
         </div>
       </motion.div>
@@ -107,16 +110,16 @@ export default function HomeScreen() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.3 }}
-        className="mt-4 px-4"
+        className="mt-4 px-4 md:px-6 lg:px-8"
       >
-        <div className="h-12 rounded-full bg-card-elevated border border-white/[0.06] flex items-center px-4 gap-3 focus-within:border-[#FF6B35]/50 focus-within:shadow-[0_0_0_3px_rgba(255,107,53,0.15)] transition-all duration-200">
-          <Search size={18} className="text-[#6B6B6B]" />
+        <div className="max-w-5xl mx-auto h-12 md:h-14 rounded-full bg-card-elevated border border-white/[0.06] flex items-center px-4 gap-3 focus-within:border-[#D94A5A]/50 focus-within:shadow-[0_0_0_3px_rgba(217,74,90,0.15)] transition-all duration-200">
+          <Search size={18} className="text-[#6B4D5A]" />
           <input
             type="text"
             placeholder="Search for food, canteens..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="flex-1 bg-transparent text-sm text-white placeholder:text-[#6B6B6B] outline-none"
+            className="flex-1 bg-transparent text-sm md:text-base text-white placeholder:text-[#6B4D5A] outline-none"
           />
         </div>
       </motion.div>
@@ -126,17 +129,17 @@ export default function HomeScreen() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.25 }}
-        className="mt-3 px-4"
+        className="mt-3 px-4 md:px-6 lg:px-8"
       >
-        <div className="flex gap-2 overflow-x-auto no-scrollbar">
+        <div className="max-w-5xl mx-auto flex gap-2 overflow-x-auto no-scrollbar">
           {filters.map((f) => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all duration-200 ${
+              className={`px-4 py-1.5 md:px-5 md:py-2 rounded-full text-xs md:text-sm font-medium whitespace-nowrap transition-all duration-200 ${
                 activeFilter === f
                   ? 'food-gradient text-white'
-                  : 'bg-card border border-white/[0.08] text-[#A0A0A0]'
+                  : 'bg-card border border-white/[0.08] text-[#8A6A78]'
               }`}
             >
               {f}
@@ -150,99 +153,103 @@ export default function HomeScreen() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.35 }}
-        className="mt-6 px-4"
+        className="mt-6 px-4 md:px-6 lg:px-8"
       >
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-bold text-white tracking-tight">Canteens</h2>
-          <button className="text-xs font-medium text-[#FF6B35] flex items-center gap-0.5">
-            See All <ChevronRight size={14} />
-          </button>
-        </div>
-        {loading ? (
-          <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
-            {[1, 2, 3].map((_, i) => (
-              <div key={i} className="snap-start flex-shrink-0 w-[280px] h-[180px] rounded-2xl bg-card animate-pulse" />
-            ))}
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-lg md:text-xl font-bold text-white tracking-tight">Canteens</h2>
+            <button className="text-xs md:text-sm font-medium text-[#D94A5A] flex items-center gap-0.5">
+              See All <ChevronRight size={14} />
+            </button>
           </div>
-        ) : (
-          <div className="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2">
-            {canteens.map((c, i) => (
-              <motion.button
-                key={c.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.35 + i * 0.08 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => handleCanteenTap(c.id)}
-                className="snap-start flex-shrink-0 w-[280px] h-[180px] rounded-2xl overflow-hidden relative group"
-              >
-                <img src={c.bannerImage} alt={c.name} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-3">
-                  <h3 className="text-base font-bold text-white">{c.name}</h3>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="flex items-center gap-1">
-                      <Star size={12} className="text-yellow-400 fill-yellow-400" />
-                      <span className="text-xs text-white font-medium">{c.rating}</span>
+          {loading ? (
+            <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+              {[1, 2, 3].map((_, i) => (
+                <div key={i} className="snap-start flex-shrink-0 w-[260px] xs:w-[280px] sm:w-[300px] md:w-[320px] lg:w-[340px] h-[160px] xs:h-[180px] md:h-[200px] rounded-2xl bg-card animate-pulse" />
+              ))}
+            </div>
+          ) : (
+            <div className="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2">
+              {canteens.map((c, i) => (
+                <motion.button
+                  key={c.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.35 + i * 0.08 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => handleCanteenTap(c.id)}
+                  className="snap-start flex-shrink-0 w-[260px] xs:w-[280px] sm:w-[300px] md:w-[320px] lg:w-[340px] h-[160px] xs:h-[180px] md:h-[200px] rounded-2xl overflow-hidden relative group"
+                >
+                  <img src={c.bannerImage} alt={c.name} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+                    <h3 className="text-base md:text-lg font-bold text-white">{c.name}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <div className="flex items-center gap-1">
+                        <Star size={12} className="text-yellow-400 fill-yellow-400" />
+                        <span className="text-xs md:text-sm text-white font-medium">{c.rating}</span>
+                      </div>
+                      <div className="flex gap-1">
+                        {c.tags.map(t => (
+                          <span key={t} className="text-[9px] md:text-[10px] px-1.5 py-0.5 rounded-full bg-white/15 text-white/80">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    <div className="flex gap-1">
-                      {c.tags.map(t => (
-                        <span key={t} className="text-[9px] px-1.5 py-0.5 rounded-full bg-white/15 text-white/80">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
+                    <RushDot level={c.rushLevel} />
                   </div>
-                  <RushDot level={c.rushLevel} />
-                </div>
-              </motion.button>
-            ))}
-          </div>
-        )}
+                </motion.button>
+              ))}
+            </div>
+          )}
+        </div>
       </motion.div>
 
-      {/* Trending Section */}
+      {/* Trending Section - Horizontal Carousel */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.35 }}
-        className="mt-6 px-4"
+        className="mt-6 px-4 md:px-6 lg:px-8"
       >
-        <div className="mb-3">
-          <h2 className="text-lg font-bold text-white tracking-tight flex items-center gap-1.5">
-            <TrendingUp size={18} className="text-[#FF6B35]" /> Trending Now
-          </h2>
-          <p className="text-[11px] text-[#6B6B6B] mt-0.5">What&apos;s hot on campus today</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          {trendingItems.map((item, i) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45 + i * 0.06, duration: 0.3 }}
-              className="bg-card rounded-2xl p-3 flex items-center gap-3"
-            >
-              <img src={item.image} alt={item.name} className="w-[72px] h-[72px] rounded-xl object-cover flex-shrink-0" />
-              <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-semibold text-white truncate">{item.name}</h4>
-                <p className="text-[10px] text-[#6B6B6B] mt-0.5 truncate">{canteens.find(c => c.id === item.canteenId)?.name}</p>
-                <div className="flex items-center gap-2 mt-1.5">
-                  <span className="text-sm font-bold text-[#FF6B35]">₹{item.price}</span>
-                  <span className="text-[10px] text-[#6B6B6B] flex items-center gap-0.5">
-                    <Clock size={10} /> {item.prepTime}
-                  </span>
-                </div>
-              </div>
-              <motion.button
-                whileTap={{ scale: 0.85 }}
-                onClick={() => handleAddToCart(item)}
-                className="w-9 h-9 rounded-full food-gradient flex items-center justify-center flex-shrink-0"
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-3">
+            <h2 className="text-lg md:text-xl font-bold text-white tracking-tight flex items-center gap-1.5">
+              <TrendingUp size={18} className="text-[#D94A5A]" /> Trending Now
+            </h2>
+            <p className="text-[11px] md:text-sm text-[#6B4D5A] mt-0.5">What&apos;s hot on campus today</p>
+          </div>
+          <div className="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2">
+            {trendingItems.map((item, i) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.45 + i * 0.06 }}
+                className="snap-start flex-shrink-0 w-[160px] xs:w-[180px] sm:w-[200px] md:w-[220px] lg:w-[240px] bg-card rounded-2xl overflow-hidden text-left cursor-default"
               >
-                <Plus size={18} className="text-white" />
-              </motion.button>
-            </motion.div>
-          ))}
+                <div className="relative">
+                  <img src={item.image} alt={item.name} className="w-full h-[100px] xs:h-[110px] md:h-[130px] lg:h-[150px] object-cover" />
+                  <div className="absolute top-2 left-2">
+                    <span className="text-[9px] md:text-[10px] px-1.5 py-0.5 rounded-full bg-[#D94A5A]/80 text-white font-medium">
+                      Trending
+                    </span>
+                  </div>
+                </div>
+                <div className="p-2.5 md:p-3">
+                  <h4 className="text-sm md:text-base font-semibold text-white truncate">{item.name}</h4>
+                  <p className="text-[9px] md:text-[10px] text-[#6B4D5A] mt-0.5 truncate">{canteens.find(c => c.id === item.canteenId)?.name}</p>
+                  <div className="flex items-center justify-between mt-1.5">
+                    <span className="text-sm md:text-base font-bold text-[#D94A5A]">₹{item.price}</span>
+                    <span className="text-[9px] md:text-[10px] text-[#6B4D5A] flex items-center gap-0.5">
+                      <Clock size={9} /> {item.prepTime}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.div>
 
@@ -251,38 +258,41 @@ export default function HomeScreen() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7, duration: 0.3 }}
-        className="mt-6 px-4 pb-28"
+        className="mt-6 px-4 md:px-6 lg:px-8 pb-6"
       >
-        <div className="mb-3">
-          <h2 className="text-lg font-bold text-white tracking-tight flex items-center gap-1.5">
-            <Zap size={18} className="text-yellow-400" /> Fastest to Prepare
-          </h2>
-        </div>
-        <div className="flex gap-2.5 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2">
-          {fastItems.map((item, i) => (
-            <motion.button
-              key={item.id}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.75 + i * 0.06 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => handleAddToCart(item.id, item.name)}
-              className="snap-start flex-shrink-0 w-[140px] bg-card rounded-xl overflow-hidden"
-            >
-              <img src={item.image} alt={item.name} className="w-full h-[100px] object-cover" />
-              <div className="p-2">
-                <p className="text-xs font-semibold text-white truncate">{item.name}</p>
-                <div className="flex items-center justify-between mt-1">
-                  <span className="text-xs font-bold text-[#FF6B35]">₹{item.price}</span>
-                  <span className="text-[9px] text-[#6B6B6B] flex items-center gap-0.5">
-                    <Clock size={9} /> {item.prepTime}
-                  </span>
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-3">
+            <h2 className="text-lg md:text-xl font-bold text-white tracking-tight flex items-center gap-1.5">
+              <Zap size={18} className="text-yellow-400" /> Fastest to Prepare
+            </h2>
+          </div>
+          <div className="flex gap-2.5 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2">
+            {fastItems.map((item, i) => (
+              <motion.button
+                key={item.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.75 + i * 0.06 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => handleAddToCart(item)}
+                className="snap-start flex-shrink-0 w-[120px] xs:w-[140px] sm:w-[160px] md:w-[180px] lg:w-[200px] bg-card rounded-xl overflow-hidden"
+              >
+                <img src={item.image} alt={item.name} className="w-full h-[80px] xs:h-[100px] md:h-[120px] lg:h-[130px] object-cover" />
+                <div className="p-2 md:p-3">
+                  <p className="text-xs md:text-sm font-semibold text-white truncate">{item.name}</p>
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-xs md:text-sm font-bold text-[#D94A5A]">₹{item.price}</span>
+                    <span className="text-[9px] md:text-[10px] text-[#6B4D5A] flex items-center gap-0.5">
+                      <Clock size={9} /> {item.prepTime}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </motion.button>
-          ))}
+              </motion.button>
+            ))}
+          </div>
         </div>
       </motion.div>
+
     </div>
   );
 }

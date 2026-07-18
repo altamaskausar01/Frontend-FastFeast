@@ -66,9 +66,9 @@ export default function GroupOrderScreen() {
   return (
     <div className="screen-surface h-full flex flex-col overflow-y-auto no-scrollbar">
       {/* Header */}
-      <div className="pt-4 px-4 pb-3">
+      <div className="pt-4 px-4 md:px-6 lg:px-8 pb-3">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-white tracking-tight">Group Order</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Group Order</h1>
           <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-500/15">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
             <span className="text-[10px] text-green-400 font-medium">Live</span>
@@ -78,7 +78,7 @@ export default function GroupOrderScreen() {
       </div>
 
       {/* Invite Link */}
-      <div className="mx-4 bg-card rounded-2xl p-3 flex items-center gap-2">
+      <div className="mx-4 md:mx-6 lg:mx-8 bg-card rounded-2xl p-3 flex items-center gap-2">
         <div className="flex-1 bg-card-elevated rounded-xl px-3 py-2">
           <p className="text-[10px] text-[#6B6B6B] truncate">fastfeast.app/g/{inviteSlug}-group-42</p>
         </div>
@@ -93,7 +93,7 @@ export default function GroupOrderScreen() {
       </div>
 
       {/* Participant Avatars */}
-      <div className="px-4 mt-4">
+      <div className="px-4 md:px-6 lg:px-8 mt-4">
         <div className="flex items-center">
           {participants.map((p, i) => (
             <motion.div
@@ -121,7 +121,7 @@ export default function GroupOrderScreen() {
       </div>
 
       {/* Add Items Button */}
-      <div className="px-4 mt-4">
+      <div className="px-4 md:px-6 lg:px-8 mt-4">
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={() => navigate('canteenDetail', 'push')}
@@ -149,7 +149,7 @@ export default function GroupOrderScreen() {
       </AnimatePresence>
 
       {/* Shared Cart */}
-      <div className="px-4 mt-4 flex-1">
+      <div className="px-4 md:px-6 lg:px-8 mt-4 flex-1">
         <h3 className="text-sm font-semibold text-white mb-2">Shared Cart</h3>
         <div className="space-y-2">
           <AnimatePresence>
@@ -187,7 +187,7 @@ export default function GroupOrderScreen() {
       </div>
 
       {/* Action Buttons */}
-      <div className="px-4 pb-8 pt-4 space-y-2 flex-shrink-0">
+      <div className="px-4 md:px-6 lg:px-8 pb-8 pt-4 space-y-2 flex-shrink-0">
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={handleLockOrder}

@@ -77,14 +77,14 @@ export default function PaymentScreen() {
   return (
     <div className="screen-surface h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 pt-4 pb-3 flex-shrink-0">
+      <div className="flex items-center gap-3 px-4 md:px-6 lg:px-8 pt-4 pb-3 flex-shrink-0">
         <motion.button whileTap={{ scale: 0.92 }} onClick={goBack} className="w-10 h-10 rounded-full bg-card flex items-center justify-center">
           <ArrowLeft size={20} className="text-white" />
         </motion.button>
         <h1 className="text-xl font-bold text-white">Payment</h1>
       </div>
 
-      <div className="flex-1 overflow-y-auto no-scrollbar px-4">
+      <div className="flex-1 overflow-y-auto no-scrollbar px-4 md:px-6 lg:px-8">
         {/* Order Summary */}
         <div className="bg-card rounded-2xl p-4 mb-4">
           <p className="text-xs text-[#A0A0A0]">Order Total</p>
@@ -148,7 +148,7 @@ export default function PaymentScreen() {
       </div>
 
       {/* Pay Button */}
-      <div className="flex-shrink-0 p-4 bg-page/95">
+      <div className="flex-shrink-0 p-4 md:px-6 lg:px-8 bg-page/95">
         <AnimatePresence mode="wait">
           {success ? (
             <motion.div

@@ -68,7 +68,7 @@ export default function OnboardingScreen() {
       </button>
 
       {/* Carousel */}
-      <div className="flex-1 flex items-center justify-center px-6">
+      <div className="flex-1 flex items-center justify-center px-6 md:px-8">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={current}
@@ -123,7 +123,7 @@ export default function OnboardingScreen() {
       </div>
 
       {/* Get Started Button */}
-      <div className="px-6 pb-10">
+      <div className="px-6 md:px-8 lg:px-12 pb-10 max-w-md mx-auto w-full">
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={next}

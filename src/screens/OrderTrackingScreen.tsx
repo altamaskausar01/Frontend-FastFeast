@@ -51,7 +51,7 @@ export default function OrderTrackingScreen() {
   return (
     <div className="screen-surface h-full flex flex-col overflow-y-auto no-scrollbar">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 pt-4 pb-3">
+      <div className="flex items-center gap-3 px-4 md:px-6 lg:px-8 pt-4 pb-3">
         <motion.button whileTap={{ scale: 0.92 }} onClick={goBack} className="w-10 h-10 rounded-full bg-card flex items-center justify-center">
           <ArrowLeft size={20} className="text-white" />
         </motion.button>
@@ -64,7 +64,7 @@ export default function OrderTrackingScreen() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="mx-4 bg-card rounded-2xl p-4 flex items-center justify-between"
+        className="mx-4 md:mx-6 lg:mx-8 bg-card rounded-2xl p-4 md:p-5 flex items-center justify-between"
       >
         <div>
           <p className="text-4xl font-extrabold text-[#FF6B35] text-shadow-token tracking-tighter">{token}</p>
@@ -76,7 +76,7 @@ export default function OrderTrackingScreen() {
       </motion.div>
 
       {/* Timeline */}
-      <div className="mx-4 mt-6">
+      <div className="mx-4 md:mx-6 lg:mx-8 mt-6">
         <div className="relative">
           {/* Vertical connector line */}
           <div className="absolute left-[23px] top-6 bottom-6 w-0.5 bg-white/10" />
@@ -143,7 +143,7 @@ export default function OrderTrackingScreen() {
         key={status}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mx-4 mt-4 text-center"
+        className="mx-4 md:mx-6 lg:mx-8 mt-4 text-center"
       >
         <p className="text-lg font-semibold text-white">{statusMessages[status]}</p>
       </motion.div>
@@ -171,7 +171,7 @@ export default function OrderTrackingScreen() {
       </div>
 
       {/* Queue Position */}
-      <div className="mx-4 mt-4 bg-card rounded-2xl p-3 flex items-center justify-between">
+      <div className="mx-4 md:mx-6 lg:mx-8 mt-4 bg-card rounded-2xl p-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-sm text-[#A0A0A0]">{queueAhead} orders ahead</span>
         </div>
@@ -184,7 +184,7 @@ export default function OrderTrackingScreen() {
       </div>
 
       {/* Call Canteen */}
-      <div className="mx-4 mt-3 bg-card rounded-2xl p-3 flex items-center justify-between">
+      <div className="mx-4 md:mx-6 lg:mx-8 mt-3 bg-card rounded-2xl p-3 flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-white">Main Canteen</p>
           <p className="text-[10px] text-[#6B6B6B]">Counter #3</p>
@@ -199,7 +199,7 @@ export default function OrderTrackingScreen() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="px-4 mt-5 pb-8"
+          className="px-4 md:px-6 lg:px-8 mt-5 pb-8 max-w-md mx-auto w-full"
         >
           <motion.button
             whileTap={{ scale: 0.97 }}
