@@ -1,4 +1,7 @@
 import type { Canteen, MenuItem, Offer, UserProfile, Order, DashboardOrder } from '@/types';
+import masalaDosaImg from '../assets/masala-dosa.png';
+import chocolateCroissantImg from '../assets/chocolate-croissant.png';
+import chickenKathiRollImg from '../assets/chicken-kathi-roll.png';
 
 export const canteens: Canteen[] = [
   {
@@ -58,7 +61,7 @@ export const menuItems: MenuItem[] = [
   { id: 'm7', canteenId: 'c1', category: 'Combos', name: 'Burger Combo', description: 'Burger + Fries + Coke', price: 199, prepTime: '10 min', image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&q=80', isVeg: false, inStock: true },
   { id: 'm8', canteenId: 'c1', category: 'Desserts', name: 'Chocolate Brownie', description: 'Warm chocolate brownie with vanilla ice cream', price: 90, prepTime: '5 min', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&q=80', isVeg: true, inStock: true },
   // South Square
-  { id: 'm9', canteenId: 'c2', category: 'Meals', name: 'Masala Dosa', description: 'Crispy dosa with spiced potato filling', price: 70, prepTime: '8 min', image: 'https://images.unsplash.com/photo-1668236543090-82ebefb0f580?w=400&q=80', isVeg: true, inStock: true, isTrending: true },
+  { id: 'm9', canteenId: 'c2', category: 'Meals', name: 'Masala Dosa', description: 'Crispy dosa with spiced potato filling', price: 70, prepTime: '8 min', image: masalaDosaImg, isVeg: true, inStock: true, isTrending: true },
   { id: 'm10', canteenId: 'c2', category: 'Meals', name: 'Idli Sambar', description: 'Soft steamed idlis with sambar and chutney', price: 50, prepTime: '5 min', image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80', isVeg: true, inStock: true, isFast: true },
   { id: 'm11', canteenId: 'c2', category: 'Snacks', name: 'Medu Vada', description: 'Crispy fried lentil donuts', price: 40, prepTime: '6 min', image: 'https://images.unsplash.com/photo-1606491956689-22ea63225580?w=400&q=80', isVeg: true, inStock: true },
   { id: 'm12', canteenId: 'c2', category: 'Beverages', name: 'Filter Coffee', description: 'Traditional South Indian filter coffee', price: 25, prepTime: '2 min', image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400&q=80', isVeg: true, inStock: true, isFast: true },
@@ -66,13 +69,13 @@ export const menuItems: MenuItem[] = [
   // Cafe Brew
   { id: 'm14', canteenId: 'c3', category: 'Beverages', name: 'Caramel Latte', description: 'Espresso with steamed milk and caramel', price: 120, prepTime: '4 min', image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=80', isVeg: true, inStock: true, isTrending: true },
   { id: 'm15', canteenId: 'c3', category: 'Beverages', name: 'Cappuccino', description: 'Rich espresso with frothy milk', price: 100, prepTime: '4 min', image: 'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400&q=80', isVeg: true, inStock: true },
-  { id: 'm16', canteenId: 'c3', category: 'Snacks', name: 'Chocolate Croissant', description: 'Buttery croissant with chocolate filling', price: 80, prepTime: '2 min', image: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=400&q=80', isVeg: true, inStock: true, isFast: true },
+  { id: 'm16', canteenId: 'c3', category: 'Snacks', name: 'Chocolate Croissant', description: 'Buttery croissant with chocolate filling', price: 80, prepTime: '2 min', image: chocolateCroissantImg, isVeg: true, inStock: true, isFast: true },
   { id: 'm17', canteenId: 'c3', category: 'Desserts', name: 'Blueberry Muffin', description: 'Freshly baked muffin with blueberries', price: 70, prepTime: '2 min', image: 'https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=400&q=80', isVeg: true, inStock: true, isFast: true },
   { id: 'm18', canteenId: 'c3', category: 'Beverages', name: 'Green Tea', description: 'Refreshing green tea with lemon and honey', price: 50, prepTime: '3 min', image: 'https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=400&q=80', isVeg: true, inStock: true, isFast: true },
   // Night Bites
   { id: 'm19', canteenId: 'c4', category: 'Snacks', name: 'Maggi Noodles', description: 'Masala Maggi with veggies and extra spice', price: 40, prepTime: '5 min', image: 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80', isVeg: true, inStock: true, isTrending: true, isFast: true },
   { id: 'm20', canteenId: 'c4', category: 'Snacks', name: 'Chicken Momos', description: 'Steamed dumplings with spicy red chutney', price: 80, prepTime: '8 min', image: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=400&q=80', isVeg: false, inStock: true },
-  { id: 'm21', canteenId: 'c4', category: 'Meals', name: 'Chicken Kathi Roll', description: 'Spiced chicken wrapped in paratha', price: 100, prepTime: '8 min', image: 'https://images.unsplash.com/photo-1606491956689-22ea63225580?w=400&q=80', isVeg: false, inStock: true, isTrending: true },
+  { id: 'm21', canteenId: 'c4', category: 'Meals', name: 'Chicken Kathi Roll', description: 'Spiced chicken wrapped in paratha', price: 100, prepTime: '8 min', image: chickenKathiRollImg, isVeg: false, inStock: true, isTrending: true },
   { id: 'm22', canteenId: 'c4', category: 'Snacks', name: 'Paneer Tikka', description: 'Grilled paneer cubes with mint chutney', price: 90, prepTime: '10 min', image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&q=80', isVeg: true, inStock: true },
   { id: 'm23', canteenId: 'c4', category: 'Beverages', name: 'Chocolate Shake', description: 'Thick chocolate milkshake with whipped cream', price: 70, prepTime: '3 min', image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&q=80', isVeg: true, inStock: true, isFast: true },
   { id: 'm24', canteenId: 'c4', category: 'Combos', name: 'Late Night Combo', description: 'Maggi + Shake + Fries', price: 149, prepTime: '8 min', image: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&q=80', isVeg: true, inStock: true },

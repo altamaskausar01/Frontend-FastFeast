@@ -1,5 +1,8 @@
 import { get, post, patch, del } from './api';
 import type { MenuItem } from '@/types';
+import masalaDosaImg from '../assets/masala-dosa.png';
+import chocolateCroissantImg from '../assets/chocolate-croissant.png';
+import chickenKathiRollImg from '../assets/chicken-kathi-roll.png';
 
 export interface MenuItemDTO extends Omit<MenuItem, 'id' | 'canteenId'> {
   _id: string;
@@ -24,6 +27,11 @@ export function extractStringId(value: unknown): string {
 }
 
 export function normalizeMenuItem(dto: MenuItemDTO): MenuItem {
+  let finalImage = dto.image;
+  if (dto.name === 'Masala Dosa') finalImage = masalaDosaImg;
+  else if (dto.name === 'Chocolate Croissant') finalImage = chocolateCroissantImg;
+  else if (dto.name === 'Chicken Kathi Roll') finalImage = chickenKathiRollImg;
+
   return {
     id: dto._id,
     canteenId: extractStringId(dto.canteenId),
@@ -32,7 +40,7 @@ export function normalizeMenuItem(dto: MenuItemDTO): MenuItem {
     description: dto.description,
     price: dto.price,
     prepTime: dto.prepTime,
-    image: dto.image,
+    image: finalImage,
     isVeg: dto.isVeg,
     inStock: dto.inStock,
     isTrending: dto.isTrending,
