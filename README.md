@@ -41,6 +41,7 @@ Fast Feast digitizes the entire ordering workflow: browse canteens and menus →
 | **Smart Home Feed** | Time-based greeting, trending items, fastest-to-prepare section, search & filters |
 | **Canteen Discovery** | Scroll-snap carousel with rush indicators (low/medium/high), rating, tags |
 | **Menu Browsing** | Category tabs, search, veg/non-veg indicators, stock status, spice customization |
+| **Smart Food Assistant** | In-house rule-based chatbot for intelligent recommendations, budget filtering, and 1-click cart addition |
 | **Cart** | Quantity stepper with long-press, bill breakdown (GST + platform fee), suggested combos |
 | **Checkout & Payment** | UPI, wallet, pay-at-counter options, confetti celebration on success |
 | **Order Token & QR** | 3D spinning digit reveal, QR code for counter scan |
