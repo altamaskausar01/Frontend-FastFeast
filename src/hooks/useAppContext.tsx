@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useCallback } from 'react';
-import type { ScreenName, TabName, CartItem, Order } from '@/types';
+import type { ScreenName, TabName, CartItem, Order, MenuItem } from '@/types';
 import { userProfile } from '@/data/mockData';
 import { getStoredToken, removeToken, storeToken } from '@/services/api';
 
@@ -229,7 +229,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, [state.screen]);
 
   const addToCart = useCallback((itemId: string, preloadedItem?: CartItem) => {
-    const handleAdd = (item: CartItem) => {
+    const handleAdd = (item: MenuItem) => {
       if (state.cart.length > 0 && state.cart[0].canteenId !== item.canteenId) {
         dispatch({ type: 'SHOW_TOAST', message: 'Cart cleared for new canteen order', toastType: 'warning' });
         setTimeout(() => dispatch({ type: 'HIDE_TOAST' }), 3000);
