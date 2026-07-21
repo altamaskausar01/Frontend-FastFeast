@@ -229,8 +229,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, [state.screen]);
 
   const addToCart = useCallback((itemId: string, preloadedItem?: CartItem) => {
+    const handleAdd = (item: CartItem) => {
+      if (state.cart.length > 0 && state.cart[0].canteenId !== item.canteenId) {
+        dispatch({ type: 'SHOW_TOAST', message: 'Cart cleared for new canteen order', toastType: 'warning' });
+        setTimeout(() => dispatch({ type: 'HIDE_TOAST' }), 3000);
+        dispatch({ type: 'CLEAR_CART' });
+        dispatch({ type: 'ADD_TO_CART', item: { ...item, quantity: 1 } });
+      } else {
+        dispatch({ type: 'ADD_TO_CART', item: { ...item, quantity: 1 } });
+      }
+    };
+
     if (preloadedItem) {
-      dispatch({ type: 'ADD_TO_CART', item: { ...preloadedItem, quantity: 1 } });
+      handleAdd(preloadedItem);
       return;
     }
     // Fallback: fetch item from API
@@ -238,12 +249,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await getMenuItemById(itemId);
         const item = normalizeMenuItem(res.data);
-        dispatch({ type: 'ADD_TO_CART', item: { ...item, quantity: 1 } });
+        handleAdd(item);
       } catch {
         // Item not found via API; silently fail
       }
     });
-  }, []);
+  }, [state.cart]);
 
   const removeFromCart = useCallback((itemId: string) => {
     dispatch({ type: 'REMOVE_FROM_CART', itemId });
